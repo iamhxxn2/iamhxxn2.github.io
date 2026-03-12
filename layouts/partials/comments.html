@@ -1,0 +1,19 @@
+{{- if site.Params.giscus -}}
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ site.Params.giscus.repo }}"
+    data-repo-id="{{ site.Params.giscus.repoId }}"
+    data-category="{{ site.Params.giscus.category }}"
+    data-category-id="{{ site.Params.giscus.categoryId }}"
+    data-mapping="{{ site.Params.giscus.mapping | default "pathname" }}"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="{{ site.Params.giscus.theme | default "preferred_color_scheme" }}"
+    data-lang="{{ site.Params.giscus.lang | default "ko" }}"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+{{- end }}

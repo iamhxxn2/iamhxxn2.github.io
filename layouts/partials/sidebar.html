@@ -1,0 +1,86 @@
+<aside class="sidebar" id="sidebar">
+  {{/* Profile Section */}}
+  <div class="sidebar-profile">
+    <img class="sidebar-avatar" src="{{ "images/avatar.svg" | relURL }}" alt="Profile">
+    <h2 class="sidebar-name">{{ site.Title }}</h2>
+    <p class="sidebar-bio">{{ site.Params.description }}</p>
+    <div class="sidebar-social">
+      {{- range site.Params.socialIcons }}
+      <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}">
+        {{- partial "svg.html" . }}
+      </a>
+      {{- end }}
+    </div>
+  </div>
+
+  {{/* Stats Section */}}
+  <div class="sidebar-stats">
+    <div class="stat-item">
+      <span class="stat-number">{{ len site.RegularPages }}</span>
+      <span class="stat-label">Posts</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" id="visitor-count">-</span>
+      <span class="stat-label">Visitors</span>
+    </div>
+  </div>
+
+  {{/* Search */}}
+  <div class="sidebar-search">
+    <input type="text" id="sidebar-search-input" placeholder="검색어를 입력하세요..." autocomplete="off">
+    <div id="sidebar-search-results"></div>
+  </div>
+
+  {{/* Hierarchical Categories */}}
+  <div class="sidebar-categories">
+    <h3 class="sidebar-section-title">Categories</h3>
+    <ul class="category-tree">
+      <li class="category-item">
+        <a href="{{ "/" | relURL }}">
+          전체 <span class="category-count">({{ len site.RegularPages }})</span>
+        </a>
+      </li>
+      {{- range $section := site.Sections }}
+      {{- $pages := $section.RegularPages }}
+      {{- if gt (len $pages) 0 }}
+      <li class="category-item has-children">
+        <span class="category-toggle">▸</span>
+        <a href="{{ $section.Permalink }}">
+          {{ $section.Title }} <span class="category-count">({{ len $pages }})</span>
+        </a>
+        <ul class="subcategory-list">
+          {{- $tags := slice }}
+          {{- range $pages }}
+            {{- range .Params.tags }}
+              {{- $tags = $tags | append . }}
+            {{- end }}
+          {{- end }}
+          {{- $uniqueTags := uniq $tags }}
+          {{- range $tag := $uniqueTags }}
+          {{- $tagPages := where $section.RegularPages "Params.tags" "intersect" (slice $tag) }}
+          <li class="subcategory-item">
+            <a href="{{ printf "/tags/%s/" (urlize $tag) | relURL }}">
+              {{ $tag }} <span class="category-count">({{ len $tagPages }})</span>
+            </a>
+          </li>
+          {{- end }}
+        </ul>
+      </li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+
+  {{/* Latest Posts */}}
+  <div class="sidebar-latest">
+    <h3 class="sidebar-section-title">Latest Posts</h3>
+    <ul class="latest-posts">
+      {{- range first 5 site.RegularPages.ByDate.Reverse }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <time>{{ .Date.Format "2006.01.02" }}</time>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</aside>

@@ -1,0 +1,98 @@
+baseURL = "https://iamhxxn2.github.io/"
+languageCode = "ko"
+defaultContentLanguage = "ko"
+title = "Hoon's Blog"
+theme = "PaperMod"
+paginate = 10
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+[params]
+  env = "production"
+  description = "AI 개발, 일상, 경제/시사를 다루는 블로그"
+  author = "Hoon"
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowToc = true
+  TocOpen = false
+  comments = true
+
+  [params.homeInfoParams]
+    Title = "Welcome"
+    Content = "AI 개발자의 기술, 일상, 경제/시사 블로그"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/iamhxxn2"
+
+  # Giscus 댓글 (GitHub Discussions 기반)
+  # 설정 방법: https://giscus.app 에서 repo 연결 후 값 입력
+  [params.giscus]
+    repo = "iamhxxn2/blog-comments"
+    repoId = ""
+    category = "Announcements"
+    categoryId = ""
+    mapping = "pathname"
+    theme = "preferred_color_scheme"
+    lang = "ko"
+
+[params.assets]
+  favicon = "/favicon.ico"
+
+# 검색 기능 (JSON 인덱스 생성)
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# 상단 메뉴 (사이드바가 있으므로 간소화)
+[[menu.main]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "tech"
+  name = "Tech"
+  url = "/tech/"
+  weight = 2
+
+[[menu.main]]
+  identifier = "lifestyle"
+  name = "Lifestyle"
+  url = "/lifestyle/"
+  weight = 3
+
+[[menu.main]]
+  identifier = "economy"
+  name = "Economy"
+  url = "/economy/"
+  weight = 4
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+  weight = 5
+
+# 카테고리, 태그 분류
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# 마크다운 설정
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    style = "monokai"
+  [markup.goldmark.renderer]
+    unsafe = true

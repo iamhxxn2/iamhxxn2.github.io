@@ -1,0 +1,364 @@
+/* ============================================
+   Sidebar Layout
+   ============================================ */
+
+.layout-wrapper {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 30px;
+}
+
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ============================================
+   Profile Section
+   ============================================ */
+
+.sidebar-profile {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.sidebar-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 3px solid var(--primary);
+}
+
+.sidebar-name {
+  font-size: 1.2rem;
+  margin: 0 0 6px 0;
+  color: var(--primary);
+}
+
+.sidebar-bio {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.sidebar-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sidebar-social a {
+  color: var(--secondary);
+  transition: color 0.2s;
+}
+
+.sidebar-social a:hover {
+  color: var(--primary);
+}
+
+.sidebar-social svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   Stats Section
+   ============================================ */
+
+.sidebar-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--secondary);
+}
+
+/* ============================================
+   Search
+   ============================================ */
+
+.sidebar-search {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#sidebar-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+  color: var(--primary);
+  font-size: 0.85rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+#sidebar-search-input:focus {
+  border-color: var(--primary);
+}
+
+#sidebar-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#sidebar-search-results.active {
+  display: block;
+}
+
+.search-result-item {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item a {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 0.85rem;
+  display: block;
+}
+
+.search-result-item a:hover {
+  color: var(--content);
+}
+
+.search-result-item .search-result-section {
+  font-size: 0.7rem;
+  color: var(--secondary);
+  margin-top: 2px;
+}
+
+/* ============================================
+   Categories Tree
+   ============================================ */
+
+.sidebar-categories {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.sidebar-section-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.category-tree {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-item {
+  margin-bottom: 4px;
+}
+
+.category-item > a {
+  display: inline-block;
+  padding: 4px 8px;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.category-item > a:hover {
+  background: var(--code-bg);
+}
+
+.category-count {
+  color: var(--secondary);
+  font-size: 0.75rem;
+}
+
+.category-toggle {
+  cursor: pointer;
+  display: inline-block;
+  width: 16px;
+  font-size: 0.75rem;
+  color: var(--secondary);
+  transition: transform 0.2s;
+  user-select: none;
+}
+
+.category-toggle.open {
+  transform: rotate(90deg);
+}
+
+.subcategory-list {
+  list-style: none;
+  padding-left: 24px;
+  margin: 2px 0;
+  display: none;
+}
+
+.subcategory-list.open {
+  display: block;
+}
+
+.subcategory-item a {
+  display: block;
+  padding: 3px 8px;
+  color: var(--secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.subcategory-item a:hover {
+  color: var(--primary);
+  background: var(--code-bg);
+}
+
+/* ============================================
+   Latest Posts
+   ============================================ */
+
+.sidebar-latest {
+  margin-bottom: 20px;
+}
+
+.latest-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.latest-posts li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.latest-posts li:last-child {
+  border-bottom: none;
+}
+
+.latest-posts a {
+  display: block;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.latest-posts a:hover {
+  color: var(--content);
+}
+
+.latest-posts time {
+  font-size: 0.7rem;
+  color: var(--secondary);
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 900px) {
+  .layout-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+    position: relative;
+    top: unset;
+    max-height: unset;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .sidebar-avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0;
+  }
+
+  .sidebar-categories,
+  .sidebar-latest {
+    display: none;
+  }
+}
