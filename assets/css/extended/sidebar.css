@@ -29,41 +29,6 @@
   border-color: rgba(135, 206, 250, 0.12);
 }
 
-/* ============================================
-   Sidebar Navigation
-   ============================================ */
-
-.sidebar-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(135, 206, 250, 0.25);
-  margin-bottom: 16px;
-}
-
-.sidebar-nav-item {
-  padding: 5px 12px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--primary);
-  text-decoration: none;
-  border-radius: 16px;
-  background: rgba(135, 206, 250, 0.15);
-  border: 1px solid transparent;
-  transition: all 0.2s;
-}
-
-.sidebar-nav-item:hover {
-  background: rgba(135, 206, 250, 0.3);
-  border-color: rgba(135, 206, 250, 0.4);
-}
-
-.sidebar-nav-item.active {
-  background: rgba(70, 160, 230, 0.25);
-  border-color: rgba(70, 160, 230, 0.5);
-  font-weight: 700;
-}
 
 .main {
   flex: 1;

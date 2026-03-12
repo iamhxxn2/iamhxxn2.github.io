@@ -1,15 +1,4 @@
 <aside class="sidebar" id="sidebar">
-  {{/* Navigation */}}
-  <nav class="sidebar-nav">
-    <a href="{{ "/" | relURL }}" class="sidebar-nav-item{{ if .IsHome }} active{{ end }}">Home</a>
-    {{- range site.Sections }}
-    {{- if gt (len .RegularPages) 0 }}
-    <a href="{{ .Permalink }}" class="sidebar-nav-item{{ if eq $.Section .Section }} active{{ end }}">{{ .Title }}</a>
-    {{- end }}
-    {{- end }}
-    <a href="{{ "/tags/" | relURL }}" class="sidebar-nav-item">Tags</a>
-  </nav>
-
   {{/* Profile Section */}}
   <div class="sidebar-profile">
     <img class="sidebar-avatar" src="{{ "images/avatar.svg" | relURL }}" alt="Profile">
@@ -27,7 +16,7 @@
   {{/* Stats Section */}}
   <div class="sidebar-stats">
     <div class="stat-item">
-      <span class="stat-number">{{ len site.RegularPages }}</span>
+      <span class="stat-number">{{ len (where site.RegularPages "Kind" "page") }}</span>
       <span class="stat-label">Posts</span>
     </div>
     <div class="stat-item">
@@ -48,34 +37,32 @@
     <ul class="category-tree">
       <li class="category-item">
         <a href="{{ "/" | relURL }}">
-          전체 <span class="category-count">({{ len site.RegularPages }})</span>
+          전체 <span class="category-count">({{ len (where site.RegularPages "Kind" "page") }})</span>
         </a>
       </li>
       {{- range $section := site.Sections }}
-      {{- $pages := $section.RegularPages }}
-      {{- if gt (len $pages) 0 }}
+      {{- $sectionPages := where site.RegularPages "Section" $section.Section }}
+      {{- if gt (len $sectionPages) 0 }}
       <li class="category-item has-children">
         <span class="category-toggle">▸</span>
         <a href="{{ $section.Permalink }}">
-          {{ $section.Title }} <span class="category-count">({{ len $pages }})</span>
+          {{ $section.Title }} <span class="category-count">({{ len $sectionPages }})</span>
         </a>
+        {{- $subsections := $section.Sections }}
+        {{- if gt (len $subsections) 0 }}
         <ul class="subcategory-list">
-          {{- $tags := slice }}
-          {{- range $pages }}
-            {{- range .Params.tags }}
-              {{- $tags = $tags | append . }}
-            {{- end }}
-          {{- end }}
-          {{- $uniqueTags := uniq $tags }}
-          {{- range $tag := $uniqueTags }}
-          {{- $tagPages := where $section.RegularPages "Params.tags" "intersect" (slice $tag) }}
+          {{- range $sub := $subsections }}
+          {{- $subPages := $sub.RegularPages }}
+          {{- if gt (len $subPages) 0 }}
           <li class="subcategory-item">
-            <a href="{{ printf "/tags/%s/" (urlize $tag) | relURL }}">
-              {{ $tag }} <span class="category-count">({{ len $tagPages }})</span>
+            <a href="{{ $sub.Permalink }}">
+              {{ $sub.Title }} <span class="category-count">({{ len $subPages }})</span>
             </a>
           </li>
           {{- end }}
+          {{- end }}
         </ul>
+        {{- end }}
       </li>
       {{- end }}
       {{- end }}
@@ -98,7 +85,7 @@
   <div class="sidebar-latest">
     <h3 class="sidebar-section-title">Latest Posts</h3>
     <ul class="latest-posts">
-      {{- range first 5 site.RegularPages.ByDate.Reverse }}
+      {{- range first 5 (where site.RegularPages "Kind" "page").ByDate.Reverse }}
       <li>
         <a href="{{ .Permalink }}">{{ .Title }}</a>
         <time>{{ .Date.Format "2006.01.02" }}</time>
