@@ -36,10 +36,10 @@ buildExpired = false
   # Giscus 댓글 (GitHub Discussions 기반)
   # 설정 방법: https://giscus.app 에서 repo 연결 후 값 입력
   [params.giscus]
-    repo = "iamhxxn2/blog-comments"
-    repoId = ""
+    repo = "iamhxxn2/iamhxxn2.github.io"
+    repoId = "R_kgDORlW8Ww"
     category = "Announcements"
-    categoryId = ""
+    categoryId = "DIC_kwDORlW8W84C4PgO"
     mapping = "pathname"
     theme = "preferred_color_scheme"
     lang = "ko"
