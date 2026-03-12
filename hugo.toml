@@ -51,36 +51,7 @@ buildExpired = false
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
-# 상단 메뉴 (사이드바가 있으므로 간소화)
-[[menu.main]]
-  identifier = "home"
-  name = "Home"
-  url = "/"
-  weight = 1
-
-[[menu.main]]
-  identifier = "tech"
-  name = "Tech"
-  url = "/tech/"
-  weight = 2
-
-[[menu.main]]
-  identifier = "lifestyle"
-  name = "Lifestyle"
-  url = "/lifestyle/"
-  weight = 3
-
-[[menu.main]]
-  identifier = "economy"
-  name = "Economy"
-  url = "/economy/"
-  weight = 4
-
-[[menu.main]]
-  identifier = "tags"
-  name = "Tags"
-  url = "/tags/"
-  weight = 5
+# 메뉴는 사이드바에서 관리 (상단 메뉴 제거)
 
 # 카테고리, 태그 분류
 [taxonomies]

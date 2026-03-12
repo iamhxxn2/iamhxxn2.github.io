@@ -1,4 +1,15 @@
 <aside class="sidebar" id="sidebar">
+  {{/* Navigation */}}
+  <nav class="sidebar-nav">
+    <a href="{{ "/" | relURL }}" class="sidebar-nav-item{{ if .IsHome }} active{{ end }}">Home</a>
+    {{- range site.Sections }}
+    {{- if gt (len .RegularPages) 0 }}
+    <a href="{{ .Permalink }}" class="sidebar-nav-item{{ if eq $.Section .Section }} active{{ end }}">{{ .Title }}</a>
+    {{- end }}
+    {{- end }}
+    <a href="{{ "/tags/" | relURL }}" class="sidebar-nav-item">Tags</a>
+  </nav>
+
   {{/* Profile Section */}}
   <div class="sidebar-profile">
     <img class="sidebar-avatar" src="{{ "images/avatar.svg" | relURL }}" alt="Profile">
@@ -69,6 +80,18 @@
       {{- end }}
       {{- end }}
     </ul>
+  </div>
+
+  {{/* Tags Cloud */}}
+  <div class="sidebar-tags">
+    <h3 class="sidebar-section-title">Tags</h3>
+    <div class="tag-cloud">
+      {{- range site.Taxonomies.tags.Alphabetical }}
+      <a href="{{ .Page.Permalink }}" class="tag-item">
+        {{ .Page.Title }} <span class="tag-count">{{ .Count }}</span>
+      </a>
+      {{- end }}
+    </div>
   </div>
 
   {{/* Latest Posts */}}
