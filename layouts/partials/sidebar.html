@@ -1,9 +1,8 @@
 <aside class="sidebar" id="sidebar">
   {{/* Profile Section */}}
   <div class="sidebar-profile">
-    <img class="sidebar-avatar" src="{{ "images/avatar.svg" | relURL }}" alt="Profile">
+    <img class="sidebar-avatar" src="{{ "images/avatar.webp" | relURL }}" alt="Profile">
     <h2 class="sidebar-name">{{ site.Title }}</h2>
-    <p class="sidebar-bio">{{ site.Params.description }}</p>
     <div class="sidebar-social">
       {{- range site.Params.socialIcons }}
       <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}">
