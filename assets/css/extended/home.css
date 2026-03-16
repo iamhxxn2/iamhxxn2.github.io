@@ -1,0 +1,86 @@
+/* ============================================
+   Home Header (Search + Post Count)
+   ============================================ */
+
+.home-header {
+  margin-bottom: 24px;
+}
+
+.home-search {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+#home-search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+  color: var(--primary);
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+#home-search-input:focus {
+  border-color: var(--primary);
+}
+
+#home-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#home-search-results.active {
+  display: block;
+}
+
+#home-search-results .search-result-item {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+#home-search-results .search-result-item:last-child {
+  border-bottom: none;
+}
+
+#home-search-results .search-result-item a {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 0.9rem;
+  display: block;
+}
+
+#home-search-results .search-result-item a:hover {
+  color: var(--content);
+}
+
+#home-search-results .search-result-section {
+  font-size: 0.75rem;
+  color: var(--secondary);
+  margin-top: 2px;
+}
+
+.home-post-count {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-post-count strong {
+  color: var(--primary);
+}

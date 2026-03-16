@@ -25,10 +25,6 @@ buildExpired = false
   TocOpen = false
   comments = true
 
-  [params.homeInfoParams]
-    Title = "Welcome"
-    Content = "AI 개발자의 기술, 일상, 경제/시사 블로그"
-
   [[params.socialIcons]]
     name = "github"
     url = "https://github.com/iamhxxn2"

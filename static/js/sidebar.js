@@ -12,11 +12,9 @@ document.querySelectorAll('.category-toggle').forEach(toggle => {
 });
 
 // ============================================
-// Fuse.js Sidebar Search
+// Fuse.js Search (shared by sidebar + home)
 // ============================================
 let fuse = null;
-const searchInput = document.getElementById('sidebar-search-input');
-const searchResults = document.getElementById('sidebar-search-results');
 
 async function initSearch() {
   if (fuse) return;
@@ -34,38 +32,45 @@ async function initSearch() {
   }
 }
 
-if (searchInput) {
-  searchInput.addEventListener('focus', initSearch);
+function setupSearch(inputId, resultsId, closestSelector) {
+  const input = document.getElementById(inputId);
+  const results = document.getElementById(resultsId);
+  if (!input || !results) return;
 
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.trim();
+  input.addEventListener('focus', initSearch);
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim();
     if (!query || !fuse) {
-      searchResults.classList.remove('active');
-      searchResults.innerHTML = '';
+      results.classList.remove('active');
+      results.innerHTML = '';
       return;
     }
 
-    const results = fuse.search(query).slice(0, 8);
-    if (results.length === 0) {
-      searchResults.innerHTML = '<div class="search-result-item"><span style="color:var(--secondary);font-size:0.85rem;">검색 결과가 없습니다</span></div>';
-      searchResults.classList.add('active');
+    const matches = fuse.search(query).slice(0, 8);
+    if (matches.length === 0) {
+      results.innerHTML = '<div class="search-result-item"><span style="color:var(--secondary);font-size:0.85rem;">검색 결과가 없습니다</span></div>';
+      results.classList.add('active');
       return;
     }
 
-    searchResults.innerHTML = results.map(r => {
+    results.innerHTML = matches.map(r => {
       const item = r.item;
       return `<div class="search-result-item">
         <a href="${item.permalink}">${item.title}</a>
         <div class="search-result-section">${item.section || ''}</div>
       </div>`;
     }).join('');
-    searchResults.classList.add('active');
+    results.classList.add('active');
   });
 
-  // Close search results when clicking outside
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.sidebar-search')) {
-      searchResults.classList.remove('active');
+    if (!e.target.closest(closestSelector)) {
+      results.classList.remove('active');
     }
   });
 }
+
+// Initialize both search bars
+setupSearch('sidebar-search-input', 'sidebar-search-results', '.sidebar-search');
+setupSearch('home-search-input', 'home-search-results', '.home-search');
