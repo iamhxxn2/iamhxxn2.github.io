@@ -1,0 +1,94 @@
+backend:
+  name: github
+  repo: iamhxxn2/iamhxxn2.github.io
+  branch: main
+  base_url: https://decap-oauth.netlify.app
+
+media_folder: static/images/uploads
+public_folder: /images/uploads
+
+locale: ko
+
+slug:
+  encoding: "unicode"
+  clean_accents: false
+
+collections:
+  # Tech
+  - name: "tech-llm"
+    label: "Tech > LLM"
+    folder: "content/tech/llm"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - { label: "Categories", name: "categories", widget: "list", default: ["Tech"] }
+      - { label: "Summary", name: "summary", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [{ label: "Image", name: "image", widget: "image", required: false }] }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "tech-python"
+    label: "Tech > Python"
+    folder: "content/tech/python"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - { label: "Categories", name: "categories", widget: "list", default: ["Tech"] }
+      - { label: "Summary", name: "summary", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [{ label: "Image", name: "image", widget: "image", required: false }] }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Lifestyle
+  - name: "lifestyle-routine"
+    label: "Lifestyle > Routine"
+    folder: "content/lifestyle/routine"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - { label: "Categories", name: "categories", widget: "list", default: ["Lifestyle"] }
+      - { label: "Summary", name: "summary", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [{ label: "Image", name: "image", widget: "image", required: false }] }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Economy
+  - name: "economy-market"
+    label: "Economy > Market"
+    folder: "content/economy/market"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - { label: "Categories", name: "categories", widget: "list", default: ["Economy"] }
+      - { label: "Summary", name: "summary", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [{ label: "Image", name: "image", widget: "image", required: false }] }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Side Project
+  - name: "side-project"
+    label: "Side Project"
+    folder: "content/side-project"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - { label: "Categories", name: "categories", widget: "list", default: ["Side Project"] }
+      - { label: "Summary", name: "summary", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [{ label: "Image", name: "image", widget: "image", required: false }] }
+      - { label: "Body", name: "body", widget: "markdown" }
