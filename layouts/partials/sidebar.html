@@ -41,7 +41,6 @@
       </li>
       {{- range $section := site.Sections }}
       {{- $sectionPages := where site.RegularPages "Section" $section.Section }}
-      {{- if gt (len $sectionPages) 0 }}
       <li class="category-item has-children">
         <span class="category-toggle">▸</span>
         <a href="{{ $section.Permalink }}">
@@ -51,19 +50,15 @@
         {{- if gt (len $subsections) 0 }}
         <ul class="subcategory-list">
           {{- range $sub := $subsections }}
-          {{- $subPages := $sub.RegularPages }}
-          {{- if gt (len $subPages) 0 }}
           <li class="subcategory-item">
             <a href="{{ $sub.Permalink }}">
-              {{ $sub.Title }} <span class="category-count">({{ len $subPages }})</span>
+              {{ $sub.Title }} <span class="category-count">({{ len $sub.RegularPages }})</span>
             </a>
           </li>
-          {{- end }}
           {{- end }}
         </ul>
         {{- end }}
       </li>
-      {{- end }}
       {{- end }}
     </ul>
   </div>
