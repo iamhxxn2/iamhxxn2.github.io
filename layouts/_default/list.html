@@ -5,14 +5,11 @@
 {{- else }} {{/* if not profileMode */}}
 
 {{- if .IsHome }}
-{{/* Home: Search bar + post count */}}
+{{/* Home Header: Blog title + post count */}}
 <div class="home-header">
-  <div class="home-search">
-    <input type="text" id="home-search-input" placeholder="검색어를 입력하세요..." autocomplete="off" maxlength="64">
-    <div id="home-search-results"></div>
-  </div>
+  <h1 class="home-title">{{ site.Title }}</h1>
   <div class="home-post-count">
-    전체 글 <strong>{{ len (where site.RegularPages "Kind" "page") }}</strong>개
+    전체 글 <strong>{{ len (where site.RegularPages "Kind" "page") }}</strong>
   </div>
 </div>
 {{- else if .Title }}
@@ -58,46 +55,59 @@
 
 {{- $paginator := .Paginate $pages }}
 
-{{- $term := .Data.Term }}
 {{- range $index, $page := $paginator.Pages }}
 
-{{- $class := "post-entry" }}
+<article class="post-card">
+  <div class="post-card-content">
+    {{/* Date */}}
+    <div class="post-card-date">
+      <time>{{ .Date.Format "2006년 01월 02일" }}</time>
+    </div>
 
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
-{{- $class = "first-entry" }}
-{{- else if $term }}
-{{- $class = "post-entry tag-entry" }}
-{{- end }}
-
-<article class="{{ $class }}">
-  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-      {{- .Title }}
-      {{- if .Draft }}
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
+    {{/* Category badges - top right */}}
+    <div class="post-card-categories">
+      {{- $section := .Section }}
+      {{- if $section }}
+      <span class="category-badge">{{ $section }}</span>
       {{- end }}
+      {{- range .Params.categories }}
+      <span class="category-badge">{{ . }}</span>
+      {{- end }}
+    </div>
+
+    {{/* Title */}}
+    <h2 class="post-card-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
     </h2>
-  </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+
+    {{/* Summary */}}
+    {{- if (ne (.Param "hideSummary") true) }}
+    <p class="post-card-summary">
+      {{ .Summary | plainify | htmlUnescape | truncate 150 }}
+    </p>
+    {{- end }}
+
+    {{/* Tags */}}
+    {{- if .Params.tags }}
+    <div class="post-card-tags">
+      {{- range .Params.tags }}
+      <a href="{{ printf "/tags/%s/" (urlize .) | absURL }}" class="post-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        {{ . }}
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+
+  {{/* Thumbnail */}}
+  {{- if .Params.cover.image }}
+  <div class="post-card-thumb">
+    <img src="{{ .Params.cover.image }}" alt="{{ .Title }}">
   </div>
   {{- end }}
-  {{- if not (.Param "hideMeta") }}
-  <footer class="entry-footer">
-    {{- partial "post_meta.html" . -}}
-  </footer>
-  {{- end }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>
+
 {{- end }}
 
 {{- if gt $paginator.TotalPages 1 }}
