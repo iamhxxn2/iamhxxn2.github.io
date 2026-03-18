@@ -78,6 +78,21 @@ collections:
       - { label: "Body", name: "body", widget: "markdown" }
 
   # Side Project
+  - name: "side-project-hugo-blog"
+    label: "Side Project > Hugo Blog"
+    folder: "content/side-project/hugo-blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - { label: "Categories", name: "categories", widget: "list", default: ["Side Project"] }
+      - { label: "Summary", name: "summary", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [{ label: "Image", name: "image", widget: "image", required: false }] }
+      - { label: "Body", name: "body", widget: "markdown" }
+
   - name: "side-project"
     label: "Side Project"
     folder: "content/side-project"
